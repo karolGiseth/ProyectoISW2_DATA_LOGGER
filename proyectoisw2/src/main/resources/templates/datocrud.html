@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Catalogo</title>
+
+<!-- Bootstrap CSS -->
+<link href="../static/css/bootstrap.css" rel="stylesheet"
+	th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+	<div class="container">
+		<br>
+		<div>
+			<a href="/save/0" class="btn btn-primary">Agregar Dato</a>
+		</div>
+		<h2 th:if="${list.isEmpty()}">Lista de datos</h2>
+		<div th:if="${!list.isEmpty()}">
+			<h2>Catalogo</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Titulo</th>
+						<th>Categoria</th>
+						<th>Descripción</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="dato : ${list}">
+						<td th:text="${dato.titulo}">
+						<td th:text="${dato.categoria}">
+						<td th:text="${inventario.Descripcion}">
+						<td><a class="btn btn-info" th:href="@{/save/{id}(id=${inventario.id})}">Editar</a></td>
+						<td><a class="btn btn-warning" th:href="@{/delete/{id}(id=${inventario.id})}">Eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>
