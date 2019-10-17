@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import co.com.edu.uan.proyecto.proyectoisw2.util.IAnotar;
 
 @Entity
-public class Anotacion{
+public class Anotacion implements IAnotar {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -80,6 +80,10 @@ public class Anotacion{
 
 
 
-	
+	@Override
+	public void anotarDato(Dato dato) {
+		// TODO Auto-generated method stub
+
+	}
 
 }

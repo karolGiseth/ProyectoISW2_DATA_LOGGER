@@ -1,45 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Catalogo</title>
+    <title>Mi primer Login</title>
 
-<!-- Bootstrap CSS -->
-<link href="../static/css/bootstrap.css" rel="stylesheet"
-	th:href="@{/css/bootstrap.css}">
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+
 </head>
 <body>
-	<div class="container">
-		<br>
-
-		<h3 th:if="${list.isEmpty()}">NO HAY DATOS PARA ANOTAR</h3>
-		<div th:if="${!list.isEmpty()}">
-			<h3>Datos ingresados</h3>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Categoria</th>
-						<th>Titulo</th>
-						<th>Descripcion</th>
-						<th></th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="anotacion : ${list}">
-						<td th:text="${anotacion.categoria}">
-						<td th:text="${anotacion.titulo}">
-						<td th:text="${anotacion.descripcion}">
-						<td><a class="btn btn-warning" th:href="@{/saveDato/{id}(id=${anotacion.id})}">Modificar dato</a></td>
-						<td><a class="btn btn-dark" th:href="@{/delete/{id}(id=${anotacion.id})}">Eliminar el dato</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-    <div>
-      <a href="/saveDato/0" class="btn btn-primary">Anotar</a>
+    <div class="modal-dialog text-center">
+        <div class="col-sm-8 main-section">
+            <div class="modal-content">
+                <div class="col-12 user-img">
+                    <img src="static/img/user.png" th:src="@{/img/user.png}"/>
+                </div>
+                <form class="col-12" th:action="@{/login}" method="post">
+                    <div class="form-group" id="user-group">
+                        <input type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
+                    </div>
+                    <div class="form-group" id="contrasena-group">
+                        <input type="password" class="form-control" placeholder="Contrasena" name="password"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+                </form>
+                <div class="col-12 forgot">
+                    <a href="#">Recordar contrasena?</a>
+                </div>
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+		            Invalid username and password.
+		        </div>
+		        <div th:if="${param.logout}" class="alert alert-success" role="alert">
+		            You have been logged out.
+		        </div>
+            </div>
+        </div>
     </div>
-	</div>
-
 </body>
 </html>

@@ -45,14 +45,14 @@ public class DatoController {
 	@PostMapping("/save")
 	public String save(Dato dato, Model model) {
 		datoService.save(dato);
-		return "redirect:/index";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id, Model model) {
 		datoService.delete(id);
 		
-		return "redirect:/index";
+		return "redirect:/";
 	}
 	
 }
