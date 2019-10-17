@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import co.com.edu.uan.proyecto.proyectoisw2.entity.Anotacion;
 import co.com.edu.uan.proyecto.proyectoisw2.entity.Dato;
+import co.com.edu.uan.proyecto.proyectoisw2.service.api.AnotacionService;
 import co.com.edu.uan.proyecto.proyectoisw2.service.api.DatoService;
 
 
@@ -20,37 +22,37 @@ import co.com.edu.uan.proyecto.proyectoisw2.service.api.DatoService;
  *
  */
 //@Controller
-public class DatoController {
+public class AnotacionController {
 
 	@Autowired
-	private DatoService datoService;
+	private AnotacionService anotacionService;
 	
 	@RequestMapping("/index")
 	public String index(Model model) {
-		model.addAttribute("list", datoService.getAll());
+		model.addAttribute("list", anotacionService.getAll());
 		return "index";
 	}
 	
 	
-	@GetMapping("/save/{id}")
+	@GetMapping("/saveDato/{id}")
 	public String showSave(@PathVariable("id") Long id , Model model) {
 		if(id != null && id != 0) {
-			model.addAttribute("dato", datoService.get(id));
+			model.addAttribute("anotacion", anotacionService.get(id));
 		}else {
-			model.addAttribute("dato", new Dato());
+			model.addAttribute("anotacion", new Anotacion());
 		}
-		return "save";
+		return "saveDato";
 	}
 	
-	@PostMapping("/save")
-	public String save(Dato dato, Model model) {
-		datoService.save(dato);
+	@PostMapping("/saveDato")
+	public String save(Anotacion anotacion, Model model) {
+		anotacionService.save(anotacion);
 		return "redirect:/index";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id, Model model) {
-		datoService.delete(id);
+		anotacionService.delete(id);
 		
 		return "redirect:/index";
 	}
