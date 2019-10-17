@@ -8,6 +8,7 @@ import co.com.edu.uan.proyecto.proyectoisw2.entity.Dato;
 import co.com.edu.uan.proyecto.proyectoisw2.service.api.DatoService;
 import co.com.edu.uan.proyecto.proyectoisw2.util.APIservicesIMPL;
 
+
 /**
  * 
  * @author Karol,
@@ -31,5 +32,6 @@ public class DatoServiceImp extends APIservicesIMPL<Dato, Long> implements DatoS
 		// TODO Auto-generated method stub
 		return datodao; 
 	}
+
 
 }
