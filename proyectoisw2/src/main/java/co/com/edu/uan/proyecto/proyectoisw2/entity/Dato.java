@@ -17,17 +17,12 @@ import javax.persistence.OneToOne;
 @Entity 
 public class Dato {
 
-	@Id //indicas que esto es el ID del atributo de la tabla en la bd
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //se indica que el valor que llege acá, sea generado automaticamente por JPA en la base de datos
+	@Id //indica que esto es el ID del atributo de la tabla en la bd
+	@GeneratedValue(strategy = GenerationType.AUTO) //se indica que el valor que llege acá, sea generado automaticamente por JPA en la base de datos
 	private Long id;
 	@Column //se indica que este atributo es una columna (atributo de tabla) en la bd
 	private String titulo;
-	
-	@ManyToOne
-	private Categoria categoria;
-	
-	@ManyToOne
-	private Cliente cliente;
+	private String categoria;
 	
 	public Long getId() {
 		return id;

@@ -1,14 +1,17 @@
 package co.com.edu.uan.proyecto.proyectoisw2.controller;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import co.com.edu.uan.proyecto.proyectoisw2.daos.DatoDAO;
 import co.com.edu.uan.proyecto.proyectoisw2.entity.Dato;
 import co.com.edu.uan.proyecto.proyectoisw2.service.api.DatoService;
 
@@ -19,40 +22,40 @@ import co.com.edu.uan.proyecto.proyectoisw2.service.api.DatoService;
  * clase que maneja el controlador de la clase dato, para esto se usa MVC de SPRINGBOOT
  *
  */
-//@Controller
+@Controller
+@RequestMapping("/crudDato")
 public class DatoController {
-
-	@Autowired
-	private DatoService datoService;
-	
-	@RequestMapping("/index")
-	public String index(Model model) {
-		model.addAttribute("list", datoService.getAll());
-		return "index";
-	}
-	
-	
-	@GetMapping("/save/{id}")
-	public String showSave(@PathVariable("id") Long id , Model model) {
-		if(id != null && id != 0) {
-			model.addAttribute("dato", datoService.get(id));
-		}else {
-			model.addAttribute("dato", new Dato());
-		}
-		return "save";
-	}
-	
-	@PostMapping("/save")
-	public String save(Dato dato, Model model) {
-		datoService.save(dato);
-		return "redirect:/index";
-	}
-	
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable Long id, Model model) {
-		datoService.delete(id);
-		
-		return "redirect:/index";
-	}
-	
+ 
+    @Autowired
+    private DatoDAO datoDao;
+ 
+    @RequestMapping(value="", method = RequestMethod.GET)
+    public String listaDatos(ModelMap mp){
+        mp.put("datos", datoDao.findAll());
+        return "crudDato/lista";
+    }
+ 
+    @RequestMapping(value="/nuevo", method=RequestMethod.GET)
+    public String nuevo(ModelMap mp){
+        mp.put("dato", new Dato());
+        return "crudDato/nuevo";
+    }
+ 
+    @RequestMapping(value="/crear", method=RequestMethod.POST)
+    public String crear(@Valid Dato dato,
+            BindingResult bindingResult, ModelMap mp){
+        if(bindingResult.hasErrors()){
+            return "/crudDato/nuevo";
+        }else{
+            datoDao.save(dato);
+            mp.put("dato", dato);
+            return "crudDato/creado";
+        }
+    }
+ 
+    @RequestMapping(value="/creado", method = RequestMethod.POST)
+    public String creado(@RequestParam("dato") Dato dato){
+        return "/crudDato/creado";
+    }
+ 
 }

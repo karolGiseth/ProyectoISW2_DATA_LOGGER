@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/login").permitAll().antMatchers("/signup")
 				.permitAll().antMatchers("/InicioAnotador/**").hasAuthority("ADMIN").anyRequest().authenticated().and().csrf()
-				.disable().formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/InicioAnotador")
+				.disable().formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/crudDato")
 				.usernameParameter("email").passwordParameter("password").and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").and().rememberMe()
 				.tokenRepository(persistentTokenRepository()).tokenValiditySeconds(60 * 60).and().exceptionHandling()

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
 import co.com.edu.uan.proyecto.proyectoisw2.daos.CategoriaDAOapi;
-import co.com.edu.uan.proyecto.proyectoisw2.daos.DatoDAOapi;
+import co.com.edu.uan.proyecto.proyectoisw2.daos.DatoDAO;
 import co.com.edu.uan.proyecto.proyectoisw2.entity.Categoria;
 import co.com.edu.uan.proyecto.proyectoisw2.service.api.CategoriaService;
 import co.com.edu.uan.proyecto.proyectoisw2.service.api.DatoService;
