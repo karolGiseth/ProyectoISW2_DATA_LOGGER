@@ -66,7 +66,7 @@ public class UserController {
 		User user = userService.findUserByEmail(auth.getName());
 
 		model.addObject("userName", user.getFirstname() + " " + user.getLastname());
-		model.setViewName("InicioAnotador");
+		model.setViewName("index");
 		return model;
 	}
 

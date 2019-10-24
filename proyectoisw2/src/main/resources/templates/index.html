@@ -11,34 +11,31 @@
 <body>
 	<div class="container">
 		<br>
-
-		<h3 th:if="${list.isEmpty()}">NO HAY DATOS PARA ANOTAR</h3>
+		<div>
+			<a href="/save/0" class="btn btn-primary">ANOTACION +!</a>
+		</div>
+		<h2 th:if="${list.isEmpty()}">SIN ANOTACIONES!</h2>
 		<div th:if="${!list.isEmpty()}">
-			<h3>Datos ingresados</h3>
+			<h2>ANOTACIONES</h2>
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Categoria</th>
 						<th>Titulo</th>
-						<th>Descripcion</th>
+						<th>Categoria</th>
 						<th></th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="anotacion : ${list}">
-						<td th:text="${anotacion.categoria}">
 						<td th:text="${anotacion.titulo}">
-						<td th:text="${anotacion.descripcion}">
-						<td><a class="btn btn-warning" th:href="@{/saveDato/{id}(id=${anotacion.id})}">Modificar dato</a></td>
-						<td><a class="btn btn-dark" th:href="@{/delete/{id}(id=${anotacion.id})}">Eliminar el dato</a></td>
+						<td th:text="${anotacion.categoria}">
+						<td><a class="btn btn-info" th:href="@{/save/{id}(id=${anotacion.id})}">Editar</a></td>
+						<td><a class="btn btn-warning" th:href="@{/delete/{id}(id=${anotacion.id})}">Eliminar</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-    <div>
-      <a href="/saveDato/0" class="btn btn-primary">Anotar</a>
-    </div>
 	</div>
 
 </body>

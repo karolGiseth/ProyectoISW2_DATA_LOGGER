@@ -1,6 +1,5 @@
 package co.com.edu.uan.proyecto.proyectoisw2.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,53 +9,49 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import co.com.edu.uan.proyecto.proyectoisw2.entity.Anotacion;
-import co.com.edu.uan.proyecto.proyectoisw2.entity.Dato;
-import co.com.edu.uan.proyecto.proyectoisw2.service.api.AnotacionService;
-import co.com.edu.uan.proyecto.proyectoisw2.service.api.DatoService;
+import co.com.edu.uan.proyecto.proyectoisw2.service.api.AnotacionServiceAPI;
 
-
-/**
- * 
- * @author Karol:
- * clase que maneja el controlador de la clase dato, para esto se usa MVC de SPRINGBOOT
- *
- */
-//@Controller
+@Controller
 public class AnotacionController {
+	
 
+	
 	@Autowired
-	private AnotacionService anotacionService;
+	private AnotacionServiceAPI anotacionServiceAPI;
+	
 	
 	@RequestMapping("/index")
 	public String index(Model model) {
-		model.addAttribute("list", anotacionService.getAll());
+		model.addAttribute("list", anotacionServiceAPI.getAll());
 		return "index";
 	}
 	
-	
-	@GetMapping("/saveDato/{id}")
+
+	@GetMapping("/save/{id}")
 	public String showSave(@PathVariable("id") Long id , Model model) {
 		if(id != null && id != 0) {
-			model.addAttribute("anotacion", anotacionService.get(id));
+			model.addAttribute("anotacion", anotacionServiceAPI.get(id));
 		}else {
 			model.addAttribute("anotacion", new Anotacion());
 		}
-		return "saveDato";
+		return "save";
 	}
 	
-	@PostMapping("/saveDato")
-	public String save(Anotacion anotacion, Model model) {
-		anotacionService.save(anotacion);
+
+	@PostMapping("/save")
+	public String save(Anotacion catalogo, Model model) {
+		anotacionServiceAPI.save(catalogo);
 		return "redirect:/index";
 	}
+	
 	
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id, Model model) {
-		anotacionService.delete(id);
+		anotacionServiceAPI.delete(id);
 		
-		return "redirect:/index";
+		return "redirect:/";
 	}
-
-
+	
+	
 	
 }
