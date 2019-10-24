@@ -8,15 +8,16 @@
 <link href="../static/css/bootstrap.css" rel="stylesheet"
 	th:href="@{/css/bootstrap.css}">
 </head>
-<body>
+<body background="https://image.freepik.com/vector-gratis/fondo-azul-claro-ondulado_1035-8917.jpg" style="background-repeat: no-repeat; background;-webkit-background-size: cover;
+					-moz-background-size: cover;
+					-o-background-size: cover;
+					background-size: cover;">
 	<div class="container">
 		<br>
-		<div>
-			<a href="/save/0" class="btn btn-primary">ANOTACION +!</a>
-		</div>
-		<h2 th:if="${list.isEmpty()}">SIN ANOTACIONES!</h2>
+		
+		<h2 align="center" th:if="${list.isEmpty()}">SIN ANOTACIONES!</h2>
 		<div th:if="${!list.isEmpty()}">
-			<h2>ANOTACIONES</h2>
+			<h2 align="center" >ANOTACIONES</h2>
 			<table class="table">
 				<thead>
 					<tr>
@@ -30,11 +31,17 @@
 					<tr th:each="anotacion : ${list}">
 						<td th:text="${anotacion.titulo}">
 						<td th:text="${anotacion.categoria}">
-						<td><a class="btn btn-info" th:href="@{/save/{id}(id=${anotacion.id})}">Editar</a></td>
-						<td><a class="btn btn-warning" th:href="@{/delete/{id}(id=${anotacion.id})}">Eliminar</a></td>
+						<td><a class="btn btn-success" th:href="@{/save/{id}(id=${anotacion.id})}">Editar</a></td>
+						<td><a class="btn btn-dark" th:href="@{/delete/{id}(id=${anotacion.id})}">Eliminar</a></td>
 					</tr>
+					
 				</tbody>
 			</table>
+			<br/>
+			<div>
+			<a href="/save/0" class="btn btn-info">ANOTACION +!</a>
+		</div>
+		
 		</div>
 	</div>
 
