@@ -49,7 +49,7 @@ public class AnotacionController {
 	public String delete(@PathVariable Long id, Model model) {
 		anotacionServiceAPI.delete(id);
 		
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	
